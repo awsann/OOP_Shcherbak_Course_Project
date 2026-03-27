@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace GasStationApp.Domain.Models
 {
-    internal class ISaveable
+    public interface ISaveable
     {
+        void SaveToJson(string filePath);
+        void LoadFromJson(string filePath);
     }
 }

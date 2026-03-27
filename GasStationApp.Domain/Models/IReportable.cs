@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace GasStationApp.Domain.Models
 {
-    internal class IReportable
+    public interface IReportable
     {
+        string GenerateReport();
+        double GetTotalRevenue();
+        int GetTransactionCount();
     }
 }

@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36616.10 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasStationApp.Domain", "GasStationApp.Domain\GasStationApp.Domain.csproj", "{143BDA58-88F1-4614-9C68-66B8D94A6160}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasStationApp.Tests", "GasStationApp.Tests\GasStationApp.Tests.csproj", "{20F58AAB-14CA-4BA6-AC6A-633A67063403}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{143BDA58-88F1-4614-9C68-66B8D94A6160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{143BDA58-88F1-4614-9C68-66B8D94A6160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{143BDA58-88F1-4614-9C68-66B8D94A6160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{143BDA58-88F1-4614-9C68-66B8D94A6160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20F58AAB-14CA-4BA6-AC6A-633A67063403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20F58AAB-14CA-4BA6-AC6A-633A67063403}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20F58AAB-14CA-4BA6-AC6A-633A67063403}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20F58AAB-14CA-4BA6-AC6A-633A67063403}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

@@ -6,7 +6,48 @@ using System.Threading.Tasks;
 
 namespace GasStationApp.Domain.Models
 {
-    internal class FuelType
+    public class FuelType : ISaveable
     {
+        private static int _nextId = 1;
+
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        private double _pricePerLiter;
+        public double PricePerLiter
+        {
+            get => _pricePerLiter;
+            private set => _pricePerLiter = value;
+        }
+
+        public FuelType(string name, double price)
+        {
+            Id = _nextId++;
+            Name = name;
+            _pricePerLiter = price;
+        }
+
+        //Встановити ціну
+        public bool SetPrice(double newPrice)
+        {
+            throw new NotImplementedException();
+        }
+
+        //Рядкове представлення
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+            //Формат: "А-95 — 56.50 грн/л"
+        }
+
+        //ISaveable
+        public void SaveToJson(string filePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoadFromJson(string filePath)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
