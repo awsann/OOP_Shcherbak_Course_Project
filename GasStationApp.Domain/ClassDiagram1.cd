@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="GasStationApp.Domain.Models.Administrator">
+    <Position X="0.5" Y="11.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AEAFAGGAAAAAAAQAAAAQAAAAAAABAgAAAAABAAAAAAA=</HashCode>
+      <FileName>Models\Administrator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GasStationApp.Domain.Models.BonusCard">
+    <Position X="7.25" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>aGAAAIAAAAAAAKAAAACAAAAAAgAAAAAAAAAAIAAEAAA=</HashCode>
+      <FileName>Models\BonusCard.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GasStationApp.Domain.Models.FuelType">
+    <Position X="10.25" Y="2" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAAAAAAAAAFAACEAAQAAIAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Models\FuelType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GasStationApp.Domain.Models.Manager">
+    <Position X="3.25" Y="11.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAEEAEAAAAAAAAAAAAAAAAAAUAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Models\Manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GasStationApp.Domain.Models.Operator">
+    <Position X="6.75" Y="11.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAAECEEAAAAAQAAAgAAAAAAAAAAABAAABAAAAAAAAA=</HashCode>
+      <FileName>Models\Operator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GasStationApp.Domain.Models.Report">
+    <Position X="16.75" Y="2" Width="2.25" />
+    <AssociationLine Name="Sale" Type="GasStationApp.Domain.Models.Sale" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="17.938" Y="2" />
+        <Point X="17.938" Y="0.815" />
+        <Point X="5.062" Y="0.815" />
+        <Point X="5.062" Y="2" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AIAAIIAAAAAAAAAAAAAABAAAIAAAAAAAAAAAgBEAAAA=</HashCode>
+      <FileName>Models\Report.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Sale" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GasStationApp.Domain.Models.Sale">
+    <Position X="3.5" Y="2" Width="2.75" />
+    <AssociationLine Name="FuelType1" Type="GasStationApp.Domain.Models.FuelType" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="2" />
+        <Point X="5.25" Y="1.436" />
+        <Point X="12.25" Y="1.436" />
+        <Point X="12.25" Y="2" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>QAADAAAAEAAQBAAAAACAAKiAAIAAFAAAEAAAAAQAAAA=</HashCode>
+      <FileName>Models\Sale.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="BonusCard1" />
+      <Property Name="FuelType1" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GasStationApp.Domain.Models.Tank">
+    <Position X="13.5" Y="2" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAAAAABBAAAQECAAAACACAEAAAQEAAAAAgAAAA=</HashCode>
+      <FileName>Models\Tank.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FuelType1" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GasStationApp.Domain.Models.User">
+    <Position X="3.25" Y="7.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAEEAAAAAAAAAgAAAAAAAAQAAhACgAAQAAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="GasStationApp.Domain.Models.IReportable">
+    <Position X="14" Y="11.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Models\IReportable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GasStationApp.Domain.Models.ISaveable">
+    <Position X="10.25" Y="11.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ISaveable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

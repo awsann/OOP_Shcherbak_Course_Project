@@ -68,5 +68,13 @@ namespace GasStationApp.Domain.Models
         {
             throw new NotImplementedException();
         }
+
+        public FuelType FuelType1
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

@@ -12,6 +12,14 @@ namespace GasStationApp.Domain.Models
         public DateTime GeneratedAt { get; private set; }
         public string ReportType { get; private set; }
 
+        public Sale Sale
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public Report(List<Sale> sales, string reportType)
         {
             Sales = sales;

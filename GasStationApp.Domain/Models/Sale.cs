@@ -20,6 +20,30 @@ namespace GasStationApp.Domain.Models
         public BonusCard? BonusCard { get; private set; }
         public double AccruedBonuses { get; private set; }
 
+        public BonusCard BonusCard1
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public FuelType FuelType1
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public User User
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public Sale(FuelType fuelType, double liters, User performedBy, BonusCard? bonusCard)
         {
             Id = _nextId++;
