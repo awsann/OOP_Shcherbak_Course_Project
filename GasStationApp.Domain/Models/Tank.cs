@@ -11,6 +11,7 @@ namespace GasStationApp.Domain.Models
 
     public class Tank : ISaveable
     {
+        private static int _nextId = 1;
         public event LowFuelEventHandler? LowFuelWarning;
 
         public int Id { get; private set; }
@@ -27,6 +28,7 @@ namespace GasStationApp.Domain.Models
 
         public Tank(int number, FuelType fuelType, double capacity)
         {
+            Id = _nextId++;
             Number = number;
             FuelType = fuelType;
             Capacity = capacity;

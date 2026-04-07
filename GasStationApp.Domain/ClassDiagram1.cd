@@ -71,16 +71,16 @@
       <FileName>Models\Sale.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="BonusCard1" />
       <Property Name="FuelType1" />
       <Property Name="User" />
+      <Property Name="BonusCard1" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="GasStationApp.Domain.Models.Tank">
     <Position X="13.5" Y="2" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>QAACAAAAAAABBAAAQECAAAACACAEAAAQEAAAAAgAAAA=</HashCode>
+      <HashCode>QAACAAAAAAABBAAAQECAAAACAKAEAAAQEAAAAAgAAAA=</HashCode>
       <FileName>Models\Tank.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

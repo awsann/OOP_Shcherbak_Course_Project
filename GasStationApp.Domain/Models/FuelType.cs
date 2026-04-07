@@ -13,6 +13,13 @@ namespace GasStationApp.Domain.Models
         public int Id { get; private set; }
         public string Name { get; private set; }
         private double _pricePerLiter;
+
+        public bool Rename(string newName)
+        {
+            if (string.IsNullOrWhiteSpace(newName)) return false;
+            Name = newName;
+            return true;
+        }
         public double PricePerLiter
         {
             get => _pricePerLiter;

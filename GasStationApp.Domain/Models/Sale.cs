@@ -20,14 +20,6 @@ namespace GasStationApp.Domain.Models
         public BonusCard? BonusCard { get; private set; }
         public double AccruedBonuses { get; private set; }
 
-        public BonusCard BonusCard1
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
         public FuelType FuelType1
         {
             get => default;
@@ -37,6 +29,14 @@ namespace GasStationApp.Domain.Models
         }
 
         public User User
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public BonusCard BonusCard1
         {
             get => default;
             set

@@ -21,6 +21,11 @@ namespace GasStationApp.Domain.Models
 
         public string LoyaltyLevel { get; private set; }
 
+        public void UpdateInfo(string newFullName, string newPhone)
+        {
+            FullName = newFullName;
+            Phone = newPhone;
+        }
         public BonusCard(string fullName, string phone)
         {
             FullName = fullName;
