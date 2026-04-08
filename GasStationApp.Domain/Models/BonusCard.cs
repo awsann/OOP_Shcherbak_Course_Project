@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GasStationApp.Domain.Models
@@ -9,8 +10,8 @@ namespace GasStationApp.Domain.Models
     public class BonusCard : ISaveable
     {
         public string CardNumber { get; private set; }
-        public string FullName { get; private set; }
-        public string Phone { get; private set; }
+        public string FullName { get; internal set; }
+        public string Phone { get; internal set; }
 
         private double _bonusBalance;
         public double BonusBalance
@@ -21,55 +22,62 @@ namespace GasStationApp.Domain.Models
 
         public string LoyaltyLevel { get; private set; }
 
-        public void UpdateInfo(string newFullName, string newPhone)
-        {
-            FullName = newFullName;
-            Phone = newPhone;
-        }
         public BonusCard(string fullName, string phone)
         {
             FullName = fullName;
             Phone = phone;
             CardNumber = GenerateCardNumber();
-            BonusBalance = 0;
+            _bonusBalance = 0;
             LoyaltyLevel = "Bronze";
         }
 
         //Нарахувати бонуси
         public void AddBonuses(double amount)
         {
-            throw new NotImplementedException();
+            if (amount <= 0)
+                return;
+            _bonusBalance += amount;
+            UpdateLoyaltyLevel();
         }
 
         //Списати бонуси
         public bool RedeemBonuses(double amount)
         {
-            throw new NotImplementedException();
+            if (amount <= 0)
+                return false;
+            if (_bonusBalance < amount)
+                return false;
+            _bonusBalance -= amount;
+            return true;
         }
 
         //Оновити рівень лояльності
         private void UpdateLoyaltyLevel()
         {
-            throw new NotImplementedException();
+            if (_bonusBalance >= 2000)
+                LoyaltyLevel = "Gold";
+            else if (_bonusBalance >= 500)
+                LoyaltyLevel = "Silver";
             //Bronze-Silver при >= 500; Silver-Gold при >= 2000
         }
 
         //Статичний метод генерації номера бонусної картки
         public static string GenerateCardNumber()
         {
-            throw new NotImplementedException();
-            //Формат: XXXX-XXXX-XXXX
+            var rng = new Random();
+            return $"{rng.Next(1000, 9999)}-{rng.Next(1000, 9999)}-{rng.Next(1000, 9999)}";
         }
 
         //ISaveable
         public void SaveToJson(string filePath)
         {
-            throw new NotImplementedException();
+            var json = JsonSerializer.Serialize(this);
+            File.WriteAllText(filePath, json);
         }
 
         public void LoadFromJson(string filePath)
         {
-            throw new NotImplementedException();
+            //реалізується через Administrator.LoadDataFromJson
         }
     }
 }

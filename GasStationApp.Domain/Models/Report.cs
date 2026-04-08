@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,14 +13,6 @@ namespace GasStationApp.Domain.Models
         public DateTime GeneratedAt { get; private set; }
         public string ReportType { get; private set; }
 
-        public Sale Sale
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
         public Report(List<Sale> sales, string reportType)
         {
             Sales = sales;
@@ -30,23 +23,25 @@ namespace GasStationApp.Domain.Models
         //IReportable
         public string GenerateReport()
         {
-            throw new NotImplementedException();
+            return $"Звіт [{ReportType}] від {GeneratedAt:dd.MM.yyyy HH:mm}\n" +
+                   $"Кількість транзакцій: {GetTransactionCount()}\n" +
+                   $"Загальна виручка: {GetTotalRevenue().ToString("F2", CultureInfo.InvariantCulture)} грн";
         }
 
         public double GetTotalRevenue()
         {
-            throw new NotImplementedException();
+            return Sales.Sum(s => s.TotalAmount);
         }
 
         public int GetTransactionCount()
         {
-            throw new NotImplementedException();
+            return Sales.Count;
         }
 
         //Фільтрація по користувачу (для звіту оператора)
         public List<Sale> FilterByUser(User user)
         {
-            throw new NotImplementedException();
+            return Sales.Where(s => s.PerformedBy == user).ToList();
         }
     }
 }

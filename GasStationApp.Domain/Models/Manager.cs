@@ -16,30 +16,43 @@ namespace GasStationApp.Domain.Models
         //Поповнення резервуару
         public bool RefillTank(Tank tank, double liters)
         {
-            throw new NotImplementedException();
+            return tank.Refill(liters);
         }
 
         // Перегляд цін та залишків
         public List<Tank> GetTanksWithPrices(List<Tank> tanks)
         {
-            throw new NotImplementedException();
+            return tanks.ToList();
         }
 
         //Бонусні картки
         public BonusCard? CreateBonusCard(string fullName, string phone, List<BonusCard> bonusCards)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(fullName))
+                return null;
+            //перевірка унікальності телефону
+            if (bonusCards.Any(c => c.Phone == phone))
+                return null;
+            var card = new BonusCard(fullName, phone);
+            bonusCards.Add(card);
+            return card;
         }
 
+        //знайти за номером, оновити лише контактні дані
         public bool EditBonusCard(string cardNumber, string newFullName, string newPhone, List<BonusCard> bonusCards)
         {
-            throw new NotImplementedException();
+            var card = bonusCards.FirstOrDefault(c => c.CardNumber == cardNumber);
+            if (card == null)
+                return false;
+            card.FullName = newFullName;
+            card.Phone = newPhone;
+            return true;
         }
 
         //Загальна статистика
         public Report GetGeneralStatistics(List<Sale> sales)
         {
-            throw new NotImplementedException();
+            return new Report(sales, "Загальна статистика");
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GasStationApp.Domain.Models
@@ -12,6 +13,7 @@ namespace GasStationApp.Domain.Models
     public class Tank : ISaveable
     {
         private static int _nextId = 1;
+
         public event LowFuelEventHandler? LowFuelWarning;
 
         public int Id { get; private set; }
@@ -38,45 +40,51 @@ namespace GasStationApp.Domain.Models
         //Поповнити резервуар
         public bool Refill(double liters)
         {
-            throw new NotImplementedException();
-            //Генерувати LowFuelWarning якщо залишок < 10%
+            if (liters <= 0)
+                return false;
+            if (_currentLevel + liters > Capacity)
+                return false;
+            _currentLevel += liters;
+            if (IsLowLevel())
+                LowFuelWarning?.Invoke(this, _currentLevel);
+            return true;
         }
 
         //Зменшити залишок
         public bool Decrease(double liters)
         {
-            throw new NotImplementedException();
+            if (liters <= 0)
+                return false;
+            if (_currentLevel < liters)
+                return false;
+            _currentLevel -= liters;
+            if (IsLowLevel())
+                LowFuelWarning?.Invoke(this, _currentLevel);
+            return true;
         }
 
         //Перевірити низький рівень
         public bool IsLowLevel()
         {
-            throw new NotImplementedException();
+            return _currentLevel < Capacity * 0.10;
         }
 
         //Відсоток заповнення
         public double GetFillPercentage()
         {
-            throw new NotImplementedException();
+            return (_currentLevel / Capacity) * 100.0;
         }
 
         //ISaveable
         public void SaveToJson(string filePath)
         {
-            throw new NotImplementedException();
+            var json = JsonSerializer.Serialize(new { Id, Number, Capacity, CurrentLevel });
+            File.WriteAllText(filePath, json);
         }
 
         public void LoadFromJson(string filePath)
         {
-            throw new NotImplementedException();
-        }
-
-        public FuelType FuelType1
-        {
-            get => default;
-            set
-            {
-            }
+            //реалізується через Administrator.LoadDataFromJson
         }
     }
 }

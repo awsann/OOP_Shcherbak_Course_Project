@@ -39,42 +39,18 @@
   </Class>
   <Class Name="GasStationApp.Domain.Models.Report">
     <Position X="16.75" Y="2" Width="2.25" />
-    <AssociationLine Name="Sale" Type="GasStationApp.Domain.Models.Sale" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="17.938" Y="2" />
-        <Point X="17.938" Y="0.815" />
-        <Point X="5.062" Y="0.815" />
-        <Point X="5.062" Y="2" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AIAAIIAAAAAAAAAAAAAABAAAIAAAAAAAAAAAgBEAAAA=</HashCode>
+      <HashCode>AIAAIAAAAAAAAAAAAAAABAAAIAAAAAAAAAAAgBEAAAA=</HashCode>
       <FileName>Models\Report.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Sale" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="GasStationApp.Domain.Models.Sale">
     <Position X="3.5" Y="2" Width="2.75" />
-    <AssociationLine Name="FuelType1" Type="GasStationApp.Domain.Models.FuelType" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="5.25" Y="2" />
-        <Point X="5.25" Y="1.436" />
-        <Point X="12.25" Y="1.436" />
-        <Point X="12.25" Y="2" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>QAADAAAAEAAQBAAAAACAAKiAAIAAFAAAEAAAAAQAAAA=</HashCode>
+      <HashCode>QAACAAAAEAAQBAAAAACAACiAAIAAFAAAEAAAAAQAAAA=</HashCode>
       <FileName>Models\Sale.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="FuelType1" />
-      <Property Name="User" />
-      <Property Name="BonusCard1" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="GasStationApp.Domain.Models.Tank">
@@ -83,15 +59,12 @@
       <HashCode>QAACAAAAAAABBAAAQECAAAACAKAEAAAQEAAAAAgAAAA=</HashCode>
       <FileName>Models\Tank.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="FuelType1" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="GasStationApp.Domain.Models.User">
     <Position X="3.25" Y="7.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>ACAAAAEEAAAAAAAAAgAAAAAAAAQAAhACgAAQAAAAAAA=</HashCode>
+      <HashCode>ACAAAAEEAAAAAAAAAgAAAAAAAAQAAhACgAAQAAAAQAA=</HashCode>
       <FileName>Models\User.cs</FileName>
     </TypeIdentifier>
   </Class>

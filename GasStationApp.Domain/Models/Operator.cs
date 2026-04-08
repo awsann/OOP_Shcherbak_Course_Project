@@ -8,7 +8,7 @@ namespace GasStationApp.Domain.Models
 {
     public class Operator : User
     {
-        //Характеристика(таблиця 2.7)
+        //час початку зміни, встановлюється при вході
         public DateTime ShiftStartTime { get; private set; }
 
         public Operator(string login, string password)
@@ -18,44 +18,60 @@ namespace GasStationApp.Domain.Models
 
         public override bool LogIn(string login, string password)
         {
-            throw new NotImplementedException();
-            //При вході встановлювати ShiftStartTime = DateTime.Now
+            bool success = base.LogIn(login, password);
+            if (success)
+                ShiftStartTime = DateTime.Now;
+            return success;
         }
 
+        //Фіксація виходу для звітності по змінах
         public override void LogOut()
         {
-            throw new NotImplementedException();
-            //Фіксація виходу для звітності по змінах
+            //факт виходу зафіксовано
         }
 
         //Продаж палива
         public Sale? MakeSale(FuelType fuelType, double liters, BonusCard? bonusCard, List<Tank> tanks)
         {
-            throw new NotImplementedException();
+            if (liters <= 0)
+                return null;
+            var tank = tanks.FirstOrDefault(t => t.FuelType == fuelType);
+            if (tank == null)
+                return null;
+            if (tank.IsLowLevel())
+                return null;
+            if (!tank.Decrease(liters))
+                return null;
+            var sale = new Sale(fuelType, liters, this, bonusCard);
+            //нарахувати бонуси на картку якщо є
+            if (bonusCard != null)
+                bonusCard.AddBonuses(sale.AccruedBonuses);
+            return sale;
         }
 
         //Перегляд цін та залишків
         public List<Tank> GetTanksWithPrices(List<Tank> tanks)
         {
-            throw new NotImplementedException();
+            return tanks.ToList();
         }
 
         //Пошук клієнта за бонусною карткою
         public BonusCard? FindClient(string cardNumber, List<BonusCard> bonusCards)
         {
-            throw new NotImplementedException();
+            return bonusCards.FirstOrDefault(c => c.CardNumber == cardNumber);
         }
 
         //Списання бонусів
         public bool RedeemBonuses(BonusCard bonusCard, double amount)
         {
-            throw new NotImplementedException();
+            return bonusCard.RedeemBonuses(amount);
         }
 
         //Звіт за зміну
         public Report GetShiftReport(List<Sale> allSales)
         {
-            throw new NotImplementedException();
+            var mySales = allSales.Where(s => s.PerformedBy == this).ToList();
+            return new Report(mySales, "Зміна оператора");
         }
     }
 }

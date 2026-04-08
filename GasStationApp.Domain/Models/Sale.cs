@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GasStationApp.Domain.Models
@@ -20,30 +21,6 @@ namespace GasStationApp.Domain.Models
         public BonusCard? BonusCard { get; private set; }
         public double AccruedBonuses { get; private set; }
 
-        public FuelType FuelType1
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public User User
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public BonusCard BonusCard1
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
         public Sale(FuelType fuelType, double liters, User performedBy, BonusCard? bonusCard)
         {
             Id = _nextId++;
@@ -60,25 +37,40 @@ namespace GasStationApp.Domain.Models
         //Розрахувати суму
         private double CalculateTotal()
         {
-            throw new NotImplementedException();
+            return Liters * PriceAtSaleTime;
         }
 
         //Розрахувати бонуси
         public double CalculateBonuses(string? loyaltyLevel)
         {
-            throw new NotImplementedException();
-            //Bronze — 3%, Silver — 5%, Gold — 7%
+            return loyaltyLevel switch
+            {
+                "Bronze" => TotalAmount * 0.03,
+                "Silver" => TotalAmount * 0.05,
+                "Gold" => TotalAmount * 0.07,
+                _ => 0
+                //Bronze — 3%, Silver — 5%, Gold — 7%
+            };
         }
 
         //ISaveable
         public void SaveToJson(string filePath)
         {
-            throw new NotImplementedException();
+            var json = JsonSerializer.Serialize(new
+            {
+                Id,
+                Liters,
+                PriceAtSaleTime,
+                TotalAmount,
+                SaleDateTime,
+                AccruedBonuses
+            });
+            File.WriteAllText(filePath, json);
         }
 
         public void LoadFromJson(string filePath)
         {
-            throw new NotImplementedException();
+            //реалізується через Administrator.LoadDataFromJson
         }
     }
 }

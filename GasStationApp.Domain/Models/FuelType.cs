@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GasStationApp.Domain.Models
@@ -11,15 +13,9 @@ namespace GasStationApp.Domain.Models
         private static int _nextId = 1;
 
         public int Id { get; private set; }
-        public string Name { get; private set; }
-        private double _pricePerLiter;
+        public string Name { get; internal set; }
 
-        public bool Rename(string newName)
-        {
-            if (string.IsNullOrWhiteSpace(newName)) return false;
-            Name = newName;
-            return true;
-        }
+        private double _pricePerLiter;
         public double PricePerLiter
         {
             get => _pricePerLiter;
@@ -36,25 +32,35 @@ namespace GasStationApp.Domain.Models
         //Встановити ціну
         public bool SetPrice(double newPrice)
         {
-            throw new NotImplementedException();
+            if (newPrice <= 0)
+                return false;
+            _pricePerLiter = newPrice;
+            return true;
         }
 
         //Рядкове представлення
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"{Name} — {_pricePerLiter.ToString("F2", CultureInfo.InvariantCulture)} грн/л";
             //Формат: "А-95 — 56.50 грн/л"
         }
 
         //ISaveable
         public void SaveToJson(string filePath)
         {
-            throw new NotImplementedException();
+            var json = JsonSerializer.Serialize(this);
+            File.WriteAllText(filePath, json);
         }
 
         public void LoadFromJson(string filePath)
         {
-            throw new NotImplementedException();
+            var json = File.ReadAllText(filePath);
+            var obj = JsonSerializer.Deserialize<FuelType>(json);
+            if (obj != null)
+            {
+                Name = obj.Name;
+                _pricePerLiter = obj.PricePerLiter;
+            }
         }
     }
 }

@@ -13,7 +13,9 @@ namespace GasStationApp.Domain.Models
         protected string Password { get; set; }
         public int FailedAttempts { get; private set; }
         public bool IsBlocked { get; private set; }
-        public static int BlockDurationMinutes { get; } = 5; //статична
+        public static int BlockDurationMinutes { get; } = 5;
+
+        private DateTime _blockedUntil;
 
         protected User(string login, string password)
         {
@@ -29,25 +31,41 @@ namespace GasStationApp.Domain.Models
         //Увійти в систему
         public virtual bool LogIn(string login, string password)
         {
-            throw new NotImplementedException();
+            if (IsBlocked)
+            {
+                if (DateTime.Now < _blockedUntil)
+                    return false;
+                else
+                    ResetFailedAttempts(); //блокування скінчилося
+            }
+            if (Login == login && Password == password)
+            {
+                ResetFailedAttempts();
+                return true;
+            }
+            IncrementFailedAttempts();
+            return false;
         }
 
         //Вийти з системи
-        public virtual void LogOut()
-        {
-            throw new NotImplementedException();
-        }
+        public virtual void LogOut() { }
 
         //Збільшити лічильник невдалих спроб
         public void IncrementFailedAttempts()
         {
-            throw new NotImplementedException();
+            FailedAttempts++;
+            if (FailedAttempts >= 3)
+            {
+                IsBlocked = true;
+                _blockedUntil = DateTime.Now.AddMinutes(BlockDurationMinutes);
+            }
         }
 
         //Скинути лічильник
         public void ResetFailedAttempts()
         {
-            throw new NotImplementedException();
+            FailedAttempts = 0;
+            IsBlocked = false;
         }
     }
 }
