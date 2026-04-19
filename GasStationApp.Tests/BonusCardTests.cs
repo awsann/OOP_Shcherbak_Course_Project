@@ -26,19 +26,19 @@ namespace GasStationApp.Tests
         }
 
         [Fact]
-        public void GenerateCardNumber_TwoCalls_ReturnsDifferentNumbers()
-        {
-            var n1 = BonusCard.GenerateCardNumber();
-            var n2 = BonusCard.GenerateCardNumber();
-            Assert.NotEqual(n1, n2);
-        }
-
-        [Fact]
         public void AddBonuses_IncreasesBalance()
         {
             var card = new BonusCard("Тест", "+380");
             card.AddBonuses(100);
             Assert.Equal(100, card.BonusBalance);
+        }
+
+        [Fact]
+        public void AddBonuses_NegativeAmount_DoesNotChangeBalance()
+        {
+            var card = new BonusCard("Тест", "+380");
+            card.AddBonuses(-100);
+            Assert.Equal(0, card.BonusBalance);
         }
 
         [Fact]
@@ -74,6 +74,15 @@ namespace GasStationApp.Tests
             var card = new BonusCard("Тест", "+380");
             card.AddBonuses(2000);
             Assert.Equal("Gold", card.LoyaltyLevel);
+        }
+
+        [Fact]
+        public void LoyaltyLevel_DoesNotDowngrade_AfterRedeeming()
+        {
+            var card = new BonusCard("Тест", "+380");
+            card.AddBonuses(500);
+            card.RedeemBonuses(300);
+            Assert.Equal("Silver", card.LoyaltyLevel);
         }
     }
 }

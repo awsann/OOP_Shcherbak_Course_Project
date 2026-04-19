@@ -63,6 +63,27 @@ namespace GasStationApp.Tests
         }
 
         [Fact]
+        public void MakeSale_ZeroLiters_ReturnsNull()
+        {
+            var (fuel, tank, tanks) = CreateSetup();
+            var op = new Operator("op1", "pass123");
+            var sale = op.MakeSale(fuel, 0, null, tanks);
+            Assert.Null(sale);
+        }
+
+        [Fact]
+        public void MakeSale_LowFuelLevel_ReturnsNull()
+        {
+            var fuel = new FuelType("А-95", 56.50);
+            var tank = new Tank(1, fuel, 10000);
+            tank.Refill(1000);
+            var tanks = new List<Tank> { tank };
+            var op = new Operator("op1", "pass123");
+            var sale = op.MakeSale(fuel, 10, null, tanks);
+            Assert.Null(sale);
+        }
+
+        [Fact]
         public void MakeSale_WithBonusCard_AccruesBonuses()
         {
             var (fuel, tank, tanks) = CreateSetup();

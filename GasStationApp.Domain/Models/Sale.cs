@@ -21,6 +21,7 @@ namespace GasStationApp.Domain.Models
         public BonusCard? BonusCard { get; private set; }
         public double AccruedBonuses { get; private set; }
 
+        //Основний конструктор для нового продажу
         public Sale(FuelType fuelType, double liters, User performedBy, BonusCard? bonusCard)
         {
             Id = _nextId++;
@@ -32,6 +33,26 @@ namespace GasStationApp.Domain.Models
             SaleDateTime = DateTime.Now;
             TotalAmount = CalculateTotal();
             AccruedBonuses = CalculateBonuses(bonusCard?.LoyaltyLevel);
+        }
+
+        //Конструктор для відновлення з JSON
+        public Sale(int id, FuelType fuelType, double liters, double priceAtSaleTime,
+                    double totalAmount, DateTime saleDateTime, User performedBy, double accruedBonuses)
+        {
+            Id = id;
+            FuelType = fuelType;
+            Liters = liters;
+            PriceAtSaleTime = priceAtSaleTime;
+            TotalAmount = totalAmount;
+            SaleDateTime = saleDateTime;
+            PerformedBy = performedBy;
+            BonusCard = null;
+            AccruedBonuses = accruedBonuses;
+        }
+
+        public static void ResetIdCounter(int startFrom)
+        {
+            _nextId = startFrom;
         }
 
         //Розрахувати суму

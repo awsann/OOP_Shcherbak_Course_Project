@@ -29,6 +29,11 @@ namespace GasStationApp.Domain.Models
             _pricePerLiter = price;
         }
 
+        public static void ResetIdCounter(int startFrom)
+        {
+            _nextId = startFrom;
+        }
+
         //Встановити ціну
         public bool SetPrice(double newPrice)
         {

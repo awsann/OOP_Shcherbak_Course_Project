@@ -42,6 +42,14 @@ namespace GasStationApp.Tests
         }
 
         [Fact]
+        public void Refill_NegativeAmount_ReturnsFalse()
+        {
+            var tank = CreateTank();
+            var result = tank.Refill(-100);
+            Assert.False(result);
+        }
+
+        [Fact]
         public void Decrease_ValidAmount_DecreasesLevel()
         {
             var tank = CreateTank();
@@ -64,7 +72,15 @@ namespace GasStationApp.Tests
         public void IsLowLevel_Below10Percent_ReturnsTrue()
         {
             var tank = CreateTank(10000);
-            tank.Refill(500); // 5% від 10000
+            tank.Refill(500); 
+            Assert.True(tank.IsLowLevel());
+        }
+
+        [Fact]
+        public void IsLowLevel_ExactlyAt10Percent_ReturnsTrue()
+        {
+            var tank = CreateTank(10000);
+            tank.Refill(1000);
             Assert.True(tank.IsLowLevel());
         }
 
@@ -80,10 +96,10 @@ namespace GasStationApp.Tests
         public void LowFuelWarning_EventFired_WhenLevelLow()
         {
             var tank = CreateTank(10000);
-            tank.Refill(1000); // 10%
+            tank.Refill(5000);
             bool eventFired = false;
             tank.LowFuelWarning += (t, level) => eventFired = true;
-            tank.Decrease(200); // впаде нижче 10%
+            tank.Decrease(4200);
             Assert.True(eventFired);
         }
     }

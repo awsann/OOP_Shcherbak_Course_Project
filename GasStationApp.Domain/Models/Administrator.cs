@@ -69,8 +69,7 @@ namespace GasStationApp.Domain.Models
                 return false;
             if (tank.CurrentLevel > newCapacity)
                 return false;
-            var prop = typeof(Tank).GetProperty("Capacity");
-            prop?.SetValue(tank, newCapacity);
+            tank.Capacity = newCapacity;
             return true;
         }
 
@@ -92,7 +91,6 @@ namespace GasStationApp.Domain.Models
             var card = bonusCards.FirstOrDefault(c => c.CardNumber == cardNumber);
             if (card == null)
                 return false;
-
             card.FullName = newFullName;
             card.Phone = newPhone;
             return true;
@@ -104,7 +102,6 @@ namespace GasStationApp.Domain.Models
             var card = bonusCards.FirstOrDefault(c => c.CardNumber == cardNumber);
             if (card == null)
                 return false;
-
             bonusCards.Remove(card);
             return true;
         }
@@ -140,10 +137,10 @@ namespace GasStationApp.Domain.Models
         }
 
         public bool LoadDataFromJson(string filePath,
-    out List<FuelType> fuelTypes,
-    out List<Tank> tanks,
-    out List<Sale> sales,
-    out List<BonusCard> bonusCards)
+            out List<FuelType> fuelTypes,
+            out List<Tank> tanks,
+            out List<Sale> sales,
+            out List<BonusCard> bonusCards)
         {
             fuelTypes = new List<FuelType>();
             tanks = new List<Tank>();
@@ -155,6 +152,7 @@ namespace GasStationApp.Domain.Models
                 var json = File.ReadAllText(filePath);
                 using var doc = JsonDocument.Parse(json);
                 var root = doc.RootElement;
+
                 //Завантажуємо типи палива
                 var fuelDict = new Dictionary<int, FuelType>();
                 foreach (var el in root.GetProperty("FuelTypes").EnumerateArray())
@@ -166,6 +164,7 @@ namespace GasStationApp.Domain.Models
                     fuelDict[oldId] = fuel;
                     fuelTypes.Add(fuel);
                 }
+
                 //Завантажуємо резервуари
                 foreach (var el in root.GetProperty("Tanks").EnumerateArray())
                 {
@@ -180,6 +179,7 @@ namespace GasStationApp.Domain.Models
                         tank.Refill(level);
                     tanks.Add(tank);
                 }
+
                 //Завантажуємо бонусні картки
                 foreach (var el in root.GetProperty("BonusCards").EnumerateArray())
                 {
@@ -191,22 +191,35 @@ namespace GasStationApp.Domain.Models
                         card.AddBonuses(balance);
                     bonusCards.Add(card);
                 }
-                //Завантажуємо продажі (Sales)
+
+                //Завантажуємо продажі
                 foreach (var el in root.GetProperty("Sales").EnumerateArray())
                 {
                     int fuelTypeId = el.GetProperty("FuelTypeId").GetInt32();
                     if (!fuelDict.TryGetValue(fuelTypeId, out var fuelType)) continue;
-                    //створюємо тимчасового оператора (використовуємо тільки login)
                     var performedBy = new Operator(
                         el.GetProperty("PerformedById").GetString()!,
                         "temp");
                     var sale = new Sale(
+                        el.GetProperty("Id").GetInt32(),
                         fuelType,
                         el.GetProperty("Liters").GetDouble(),
+                        el.GetProperty("PriceAtSaleTime").GetDouble(),
+                        el.GetProperty("TotalAmount").GetDouble(),
+                        el.GetProperty("SaleDateTime").GetDateTime(),
                         performedBy,
-                        null);
+                        el.GetProperty("AccruedBonuses").GetDouble());
                     sales.Add(sale);
                 }
+
+                //Скидаємо лічильники Id після завантаження
+                if (fuelTypes.Any())
+                    FuelType.ResetIdCounter(fuelTypes.Max(f => f.Id) + 1);
+                if (tanks.Any())
+                    Tank.ResetIdCounter(tanks.Max(t => t.Id) + 1);
+                if (sales.Any())
+                    Sale.ResetIdCounter(sales.Max(s => s.Id) + 1);
+
                 return true;
             }
             catch

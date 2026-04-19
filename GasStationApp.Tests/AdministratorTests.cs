@@ -30,6 +30,15 @@ namespace GasStationApp.Tests
         }
 
         [Fact]
+        public void AddFuelType_NegativePrice_ReturnsFalse()
+        {
+            var admin = new Administrator("admin", "Admin123");
+            var fuelTypes = new List<FuelType>();
+            var result = admin.AddFuelType("А-95", -10, fuelTypes);
+            Assert.False(result);
+        }
+
+        [Fact]
         public void EditFuelType_ExistingId_ReturnsTrue()
         {
             var admin = new Administrator("admin", "Admin123");
@@ -113,6 +122,18 @@ namespace GasStationApp.Tests
             var admin = new Administrator("admin", "Admin123");
             var tanks = new List<Tank>();
             var result = admin.EditTank(9999, 15000, tanks);
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void EditTank_NewCapacityLessThanCurrentLevel_ReturnsFalse()
+        {
+            var admin = new Administrator("admin", "Admin123");
+            var fuel = new FuelType("А-95", 56.50);
+            var tanks = new List<Tank>();
+            admin.AddTank(1, fuel, 10000, tanks);
+            tanks[0].Refill(8000);
+            var result = admin.EditTank(tanks[0].Id, 5000, tanks);
             Assert.False(result);
         }
 

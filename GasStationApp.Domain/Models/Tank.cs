@@ -19,7 +19,7 @@ namespace GasStationApp.Domain.Models
         public int Id { get; private set; }
         public int Number { get; private set; }
         public FuelType FuelType { get; private set; }
-        public double Capacity { get; private set; }
+        public double Capacity { get; internal set; }
 
         private double _currentLevel;
         public double CurrentLevel
@@ -35,6 +35,11 @@ namespace GasStationApp.Domain.Models
             FuelType = fuelType;
             Capacity = capacity;
             _currentLevel = 0;
+        }
+
+        public static void ResetIdCounter(int startFrom)
+        {
+            _nextId = startFrom;
         }
 
         //Поповнити резервуар
@@ -66,7 +71,7 @@ namespace GasStationApp.Domain.Models
         //Перевірити низький рівень
         public bool IsLowLevel()
         {
-            return _currentLevel < Capacity * 0.10;
+            return _currentLevel <= Capacity * 0.10;
         }
 
         //Відсоток заповнення
