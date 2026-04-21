@@ -77,11 +77,11 @@ namespace GasStationApp.Tests
         }
 
         [Fact]
-        public void IsLowLevel_ExactlyAt10Percent_ReturnsTrue()
+        public void IsLowLevel_ExactlyAt10Percent_ReturnsFalse()
         {
             var tank = CreateTank(10000);
             tank.Refill(1000);
-            Assert.True(tank.IsLowLevel());
+            Assert.False(tank.IsLowLevel());
         }
 
         [Fact]

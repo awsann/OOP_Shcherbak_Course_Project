@@ -71,7 +71,7 @@ namespace GasStationApp.Domain.Models
         //Перевірити низький рівень
         public bool IsLowLevel()
         {
-            return _currentLevel <= Capacity * 0.10;
+            return _currentLevel < Capacity * 0.10;
         }
 
         //Відсоток заповнення

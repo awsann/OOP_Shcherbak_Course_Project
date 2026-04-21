@@ -78,6 +78,8 @@ namespace GasStationApp.Domain.Models
         {
             if (string.IsNullOrWhiteSpace(fullName))
                 return null;
+            if (!BonusCard.IsValidPhone(phone))
+                return null;
             if (bonusCards.Any(c => c.Phone == phone))
                 return null;
             var card = new BonusCard(fullName, phone);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace GasStationApp.Domain.Models
@@ -29,6 +30,14 @@ namespace GasStationApp.Domain.Models
             CardNumber = GenerateCardNumber();
             _bonusBalance = 0;
             LoyaltyLevel = "Bronze";
+        }
+
+        //Перевірка формату телефону +38(0XX)-XXX-XX-XX
+        public static bool IsValidPhone(string phone)
+        {
+            if (string.IsNullOrWhiteSpace(phone))
+                return false;
+            return Regex.IsMatch(phone, @"^\+38\(0\d{2}\)-\d{3}-\d{2}-\d{2}$");
         }
 
         //Нарахувати бонуси
@@ -66,6 +75,7 @@ namespace GasStationApp.Domain.Models
         {
             var rng = new Random();
             return $"{rng.Next(1000, 9999)}-{rng.Next(1000, 9999)}-{rng.Next(1000, 9999)}";
+            //Формат XXXX-XXXX-XXXX
         }
 
         //ISaveable

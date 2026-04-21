@@ -142,9 +142,18 @@ namespace GasStationApp.Tests
         {
             var admin = new Administrator("admin", "Admin123");
             var cards = new List<BonusCard>();
-            var card = admin.CreateBonusCard("Сидоренко С.С.", "+380501112233", cards);
+            var card = admin.CreateBonusCard("Сидоренко С.С.", "+38(050)-111-22-33", cards);
             Assert.NotNull(card);
             Assert.Single(cards);
+        }
+
+        [Fact]
+        public void CreateBonusCard_InvalidPhone_ReturnsNull()
+        {
+            var admin = new Administrator("admin", "Admin123");
+            var cards = new List<BonusCard>();
+            var card = admin.CreateBonusCard("Сидоренко С.С.", "+380501112233", cards);
+            Assert.Null(card);
         }
 
         [Fact]
@@ -152,8 +161,8 @@ namespace GasStationApp.Tests
         {
             var admin = new Administrator("admin", "Admin123");
             var cards = new List<BonusCard>();
-            admin.CreateBonusCard("Сидоренко С.С.", "+380501112233", cards);
-            var duplicate = admin.CreateBonusCard("Інший", "+380501112233", cards);
+            admin.CreateBonusCard("Сидоренко С.С.", "+38(050)-111-22-33", cards);
+            var duplicate = admin.CreateBonusCard("Інший", "+38(050)-111-22-33", cards);
             Assert.Null(duplicate);
         }
 
@@ -162,8 +171,8 @@ namespace GasStationApp.Tests
         {
             var admin = new Administrator("admin", "Admin123");
             var cards = new List<BonusCard>();
-            var card = admin.CreateBonusCard("Сидоренко С.С.", "+380501112233", cards);
-            var result = admin.EditBonusCard(card.CardNumber, "Мороз М.М.", "+380661112233", cards);
+            var card = admin.CreateBonusCard("Сидоренко С.С.", "+38(050)-111-22-33", cards);
+            var result = admin.EditBonusCard(card.CardNumber, "Мороз М.М.", "+38(066)-111-22-33", cards);
             Assert.True(result);
             Assert.Equal("Мороз М.М.", card.FullName);
         }
@@ -173,7 +182,7 @@ namespace GasStationApp.Tests
         {
             var admin = new Administrator("admin", "Admin123");
             var cards = new List<BonusCard>();
-            var card = admin.CreateBonusCard("Сидоренко С.С.", "+380501112233", cards);
+            var card = admin.CreateBonusCard("Сидоренко С.С.", "+38(050)-111-22-33", cards);
             var result = admin.DeleteBonusCard(card.CardNumber, cards);
             Assert.True(result);
             Assert.Empty(cards);

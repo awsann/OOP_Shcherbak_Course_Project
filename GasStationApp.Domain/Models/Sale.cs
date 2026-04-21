@@ -36,8 +36,7 @@ namespace GasStationApp.Domain.Models
         }
 
         //Конструктор для відновлення з JSON
-        public Sale(int id, FuelType fuelType, double liters, double priceAtSaleTime,
-                    double totalAmount, DateTime saleDateTime, User performedBy, double accruedBonuses)
+        public Sale(int id, FuelType fuelType, double liters, double priceAtSaleTime, double totalAmount, DateTime saleDateTime, User performedBy, double accruedBonuses)
         {
             Id = id;
             FuelType = fuelType;

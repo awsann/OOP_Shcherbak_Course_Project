@@ -50,10 +50,19 @@ namespace GasStationApp.Tests
         {
             var manager = new Manager("mgr1", "pass123");
             var cards = new List<BonusCard>();
-            var card = manager.CreateBonusCard("Петренко П.П.", "+380671234567", cards);
+            var card = manager.CreateBonusCard("Петренко П.П.", "+38(067)-123-45-67", cards);
             Assert.NotNull(card);
             Assert.Equal("Петренко П.П.", card.FullName);
             Assert.Single(cards);
+        }
+
+        [Fact]
+        public void CreateBonusCard_InvalidPhone_ReturnsNull()
+        {
+            var manager = new Manager("mgr1", "pass123");
+            var cards = new List<BonusCard>();
+            var card = manager.CreateBonusCard("Петренко П.П.", "+380671234567", cards);
+            Assert.Null(card);
         }
 
         [Fact]
@@ -61,8 +70,8 @@ namespace GasStationApp.Tests
         {
             var manager = new Manager("mgr1", "pass123");
             var cards = new List<BonusCard>();
-            manager.CreateBonusCard("Петренко П.П.", "+380671234567", cards);
-            var duplicate = manager.CreateBonusCard("Інший", "+380671234567", cards);
+            manager.CreateBonusCard("Петренко П.П.", "+38(067)-123-45-67", cards);
+            var duplicate = manager.CreateBonusCard("Інший", "+38(067)-123-45-67", cards);
             Assert.Null(duplicate);
         }
 
@@ -71,8 +80,8 @@ namespace GasStationApp.Tests
         {
             var manager = new Manager("mgr1", "pass123");
             var cards = new List<BonusCard>();
-            var card = manager.CreateBonusCard("Петренко П.П.", "+380671234567", cards);
-            var result = manager.EditBonusCard(card.CardNumber, "Коваленко К.К.", "+380991234567", cards);
+            var card = manager.CreateBonusCard("Петренко П.П.", "+38(067)-123-45-67", cards);
+            var result = manager.EditBonusCard(card.CardNumber, "Коваленко К.К.", "+38(099)-123-45-67", cards);
             Assert.True(result);
             Assert.Equal("Коваленко К.К.", card.FullName);
         }
@@ -82,7 +91,7 @@ namespace GasStationApp.Tests
         {
             var manager = new Manager("mgr1", "pass123");
             var cards = new List<BonusCard>();
-            var result = manager.EditBonusCard("0000-0000-0000", "Тест", "+380", cards);
+            var result = manager.EditBonusCard("0000-0000-0000", "Тест", "+38(067)-123-45-67", cards);
             Assert.False(result);
         }
 

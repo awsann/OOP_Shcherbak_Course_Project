@@ -76,7 +76,7 @@ namespace GasStationApp.Tests
         {
             var fuel = new FuelType("А-95", 56.50);
             var tank = new Tank(1, fuel, 10000);
-            tank.Refill(1000);
+            tank.Refill(500); // 5% — нижче 10%
             var tanks = new List<Tank> { tank };
             var op = new Operator("op1", "pass123");
             var sale = op.MakeSale(fuel, 10, null, tanks);
@@ -88,7 +88,7 @@ namespace GasStationApp.Tests
         {
             var (fuel, tank, tanks) = CreateSetup();
             var op = new Operator("op1", "pass123");
-            var card = new BonusCard("Тест", "+380501234567");
+            var card = new BonusCard("Тест", "+38(050)-123-45-67");
             var sale = op.MakeSale(fuel, 10, card, tanks);
             Assert.NotNull(sale);
             Assert.True(card.BonusBalance > 0);
@@ -107,7 +107,7 @@ namespace GasStationApp.Tests
         public void FindClient_ExistingCard_ReturnsCard()
         {
             var op = new Operator("op1", "pass123");
-            var card = new BonusCard("Іванов І.І.", "+380501234567");
+            var card = new BonusCard("Іванов І.І.", "+38(050)-123-45-67");
             var cards = new List<BonusCard> { card };
             var found = op.FindClient(card.CardNumber, cards);
             Assert.NotNull(found);
@@ -127,7 +127,7 @@ namespace GasStationApp.Tests
         public void RedeemBonuses_SufficientBalance_ReturnsTrue()
         {
             var op = new Operator("op1", "pass123");
-            var card = new BonusCard("Тест", "+380");
+            var card = new BonusCard("Тест", "+38(050)-123-45-67");
             card.AddBonuses(200);
             var result = op.RedeemBonuses(card, 100);
             Assert.True(result);
@@ -138,7 +138,7 @@ namespace GasStationApp.Tests
         public void RedeemBonuses_InsufficientBalance_ReturnsFalse()
         {
             var op = new Operator("op1", "pass123");
-            var card = new BonusCard("Тест", "+380");
+            var card = new BonusCard("Тест", "+38(050)-123-45-67");
             card.AddBonuses(50);
             var result = op.RedeemBonuses(card, 200);
             Assert.False(result);
