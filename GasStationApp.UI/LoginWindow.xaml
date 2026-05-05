@@ -5,8 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GasStationApp.UI"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Екран авторизації" Height="800" Width="650"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" Background="#FFB6D2D0">
+
+    <Grid Background="#FFD8EAE8" Margin="10,10,10,10">
+        <TextBlock Text="Управління АЗС"
+                   FontSize="36" FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,200,0,0"/>
+        <TextBlock Text="Логін"
+                   FontSize="18"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="165,310,0,0"/>
+        <TextBox x:Name="TxtLogin"
+                 Height="36" FontSize="18"
+                 Width="320"
+                 Padding="8,4"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Margin="165,335,0,0" VerticalContentAlignment="Center"/>
+        <TextBlock Text="Пароль"
+                   FontSize="18"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="165,390,0,0"/>
+        <PasswordBox x:Name="TxtPassword"
+                     Height="36" FontSize="18"
+                     Width="200"
+                     Padding="8,4"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Margin="165,415,0,0" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="TxtPasswordVisible"
+                 Height="36" FontSize="18"
+                 Width="200"
+                 Padding="8,4"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Margin="165,415,0,0"
+                 Visibility="Collapsed" VerticalContentAlignment="Center"/>
+        <Button Content="Показати / Сховати"
+                Width="110" Height="36"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="375,415,0,0"
+                Click="BtnTogglePassword_Click"/>
+        <Button x:Name="BtnLogin"
+                Content="Увійти"
+                Height="44" Width="320"
+                FontSize="22" FontWeight="Bold"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="165,480,0,0"
+                Click="BtnLogin_Click" Background="#FFB6D2D0" BorderThickness="2,2,2,2" BorderBrush="#FF728C8A"/>
+        <TextBlock x:Name="TxtError"
+                   FontSize="16"
+                   Foreground="Red"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,540,0,0"
+                   TextWrapping="Wrap"/>
+        <Label 
+            Content="Виконав: студент(ка) 2 курсу групи 622п: Щербак А. В." 
+            HorizontalAlignment="Center" 
+            Margin="0,54,0,0" 
+            VerticalAlignment="Top" 
+            FontSize="18"/>
     </Grid>
 </Window>

@@ -18,7 +18,30 @@ namespace GasStationApp.Domain.Models
         public double BonusBalance
         {
             get => _bonusBalance;
-            private set => _bonusBalance = value;
+            private set
+            {
+                if (value < 0)
+                    return;
+                _bonusBalance = value;
+                UpdateLoyaltyLevel();
+            }
+        }
+
+        public void AddBonuses(double amount)
+        {
+            if (amount <= 0)
+                return;
+            BonusBalance = _bonusBalance + amount;
+        }
+
+        public bool RedeemBonuses(double amount)
+        {
+            if (amount <= 0)
+                return false;
+            if (_bonusBalance < amount)
+                return false;
+            BonusBalance = _bonusBalance - amount;
+            return true;
         }
 
         public string LoyaltyLevel { get; private set; }
@@ -38,26 +61,6 @@ namespace GasStationApp.Domain.Models
             if (string.IsNullOrWhiteSpace(phone))
                 return false;
             return Regex.IsMatch(phone, @"^\+38\(0\d{2}\)-\d{3}-\d{2}-\d{2}$");
-        }
-
-        //Нарахувати бонуси
-        public void AddBonuses(double amount)
-        {
-            if (amount <= 0)
-                return;
-            _bonusBalance += amount;
-            UpdateLoyaltyLevel();
-        }
-
-        //Списати бонуси
-        public bool RedeemBonuses(double amount)
-        {
-            if (amount <= 0)
-                return false;
-            if (_bonusBalance < amount)
-                return false;
-            _bonusBalance -= amount;
-            return true;
         }
 
         //Оновити рівень лояльності

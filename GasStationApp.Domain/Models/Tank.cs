@@ -37,6 +37,8 @@ namespace GasStationApp.Domain.Models
             _currentLevel = 0;
         }
 
+        public double FillPercentage => GetFillPercentage();
+
         public static void ResetIdCounter(int startFrom)
         {
             _nextId = startFrom;

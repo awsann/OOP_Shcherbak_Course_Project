@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="GasStationApp.UI.AdminWindow">
+    <Position X="0.75" Y="0.5" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAwAGAAAAAAMgAgEAACAAAAAAAAAACiAAoCBAQE=</HashCode>
+      <FileName>AdminWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GasStationApp.UI.LoginWindow">
+    <Position X="5.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAgAAAAAAAAAAABQAAAAAAAIAAEAIIAAAAAAA=</HashCode>
+      <FileName>LoginWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GasStationApp.UI.ManagerWindow">
+    <Position X="12.5" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAGAAAAAAIBAAAAQIAAAAAAAAAACiAAAAAAAA=</HashCode>
+      <FileName>ManagerWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GasStationApp.UI.OperatorWindow">
+    <Position X="8.75" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAEAAACAACAAAAgAABAAAEAAAAACiAAAAAAAA=</HashCode>
+      <FileName>OperatorWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

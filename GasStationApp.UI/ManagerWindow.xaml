@@ -3,10 +3,114 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GasStationApp.UI"
         mc:Ignorable="d"
-        Title="ManagerWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Менеджер" Height="800" Width="650"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" Background="#FFB6D2D0">
+
+    <Grid Background="#FFD8EAE8" Margin="10">
+        <TextBlock Text="Менеджер"
+                   FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="10,10,0,0"/>
+        <Button Content="Вийти"
+                Width="100" Height="30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,10,10,0"
+                Background="#FFB6D2D0"
+                BorderBrush="#FF728C8A"
+                BorderThickness="2"
+                FontSize="14"
+                Click="BtnLogOut_Click"/>
+        <TabControl Margin="10,55,10,10" Background="#FFD8EAE8">
+            <TabItem Header="Резервуари">
+                <Grid Margin="10">
+                    <DataGrid x:Name="DgTanks"
+                              Height="380"
+                              VerticalAlignment="Top"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="№" Binding="{Binding Number}" Width="50"/>
+                            <DataGridTextColumn Header="Паливо" Binding="{Binding FuelType.Name}" Width="120"/>
+                            <DataGridTextColumn Header="Місткість" Binding="{Binding Capacity}" Width="90"/>
+                            <DataGridTextColumn Header="Залишок" Binding="{Binding CurrentLevel}" Width="90"/>
+                            <DataGridTextColumn Header="%" Binding="{Binding FillPercentage, StringFormat={}{0:F1}}" Width="60"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Text="Кількість (л):" FontSize="14"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,395,0,0"/>
+                    <TextBox x:Name="TxtRefillAmount" Width="100" Height="30" FontSize="14"
+                             HorizontalAlignment="Left" VerticalAlignment="Top"
+                             Margin="120,392,0,0" Padding="4,4"/>
+                    <Button Content="Поповнити" Width="110" Height="30" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="235,392,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnRefill_Click"/>
+                    <TextBlock x:Name="TxtRefillMessage" FontSize="13"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,435,0,0" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Бонусні картки">
+                <Grid Margin="10">
+                    <DataGrid x:Name="DgBonusCards"
+                              Height="320"
+                              VerticalAlignment="Top"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер" Binding="{Binding CardNumber}" Width="140"/>
+                            <DataGridTextColumn Header="ПІБ" Binding="{Binding FullName}" Width="150"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="140"/>
+                            <DataGridTextColumn Header="Баланс" Binding="{Binding BonusBalance}" Width="80"/>
+                            <DataGridTextColumn Header="Рівень" Binding="{Binding LoyaltyLevel}" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Text="ПІБ:" FontSize="14"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,335,0,0"/>
+                    <TextBox x:Name="TxtCardFullName" Width="170" Height="30" FontSize="14"
+                             HorizontalAlignment="Left" VerticalAlignment="Top"
+                             Margin="45,332,0,0" Padding="4,4"/>
+                    <TextBlock Text="Телефон:" FontSize="14"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="230,335,0,0"/>
+                    <TextBox x:Name="TxtCardPhone" Width="150" Height="30" FontSize="14"
+                             HorizontalAlignment="Left" VerticalAlignment="Top"
+                             Margin="300,332,0,0" Padding="4,4"/>
+                    <Button Content="Створити" Width="90" Height="30" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="0,375,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnCreateCard_Click"/>
+                    <Button Content="Зберегти" Width="90" Height="30" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="100,375,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnEditCard_Click"/>
+                    <TextBlock x:Name="TxtCardMessage" FontSize="13" Foreground="Red"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,415,0,0" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Статистика">
+                <Grid Margin="10">
+                    <Button Content="Сформувати статистику"
+                            Width="200" Height="36" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="0,10,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnStatistics_Click"/>
+                    <TextBlock x:Name="TxtStatistics" FontSize="15"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,60,0,0" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

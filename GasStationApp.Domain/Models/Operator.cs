@@ -10,6 +10,7 @@ namespace GasStationApp.Domain.Models
     {
         //час початку зміни, встановлюється при вході
         public DateTime ShiftStartTime { get; private set; }
+        public DateTime ShiftEndTime { get; private set; }
 
         public Operator(string login, string password)
             : base(login, password) { }
@@ -27,7 +28,7 @@ namespace GasStationApp.Domain.Models
         //Фіксація виходу для звітності по змінах
         public override void LogOut()
         {
-            //факт виходу зафіксовано
+            ShiftEndTime = DateTime.Now;
         }
 
         //Продаж палива

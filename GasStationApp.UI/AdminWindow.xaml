@@ -3,10 +3,220 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GasStationApp.UI"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Адміністратор" Height="800" Width="650"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" Background="#FFB6D2D0">
+    <Grid Background="#FFD8EAE8" Margin="10">
+        <TextBlock Text="Адміністратор"
+                   FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="10,10,0,0"/>
+        <Button Content="Вийти"
+                Width="100" Height="30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,10,10,0"
+                Background="#FFB6D2D0"
+                BorderBrush="#FF728C8A"
+                BorderThickness="2"
+                FontSize="14"
+                Click="BtnLogOut_Click"/>
+        <TabControl Margin="10,55,10,10" Background="#FFD8EAE8">
+            <TabItem Header="Типи палива">
+                <Grid Margin="10">
+                    <DataGrid x:Name="DgFuelTypes"
+                              Height="320"
+                              VerticalAlignment="Top"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50"/>
+                            <DataGridTextColumn Header="Назва" Binding="{Binding Name}" Width="200"/>
+                            <DataGridTextColumn Header="Ціна (грн/л)" Binding="{Binding PricePerLiter}" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Text="Назва:" FontSize="14"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,335,0,0"/>
+                    <TextBox x:Name="TxtFuelName" Width="160" Height="30" FontSize="14"
+                             HorizontalAlignment="Left" VerticalAlignment="Top"
+                             Margin="60,332,0,0" Padding="4,4"/>
+                    <TextBlock Text="Ціна:" FontSize="14"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="235,335,0,0"/>
+                    <TextBox x:Name="TxtFuelPrice" Width="100" Height="30" FontSize="14"
+                             HorizontalAlignment="Left" VerticalAlignment="Top"
+                             Margin="275,332,0,0" Padding="4,4"/>
+                    <Button Content="Додати" Width="90" Height="30" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="0,375,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnAddFuel_Click"/>
+                    <Button Content="Зберегти" Width="90" Height="30" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="100,375,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnEditFuel_Click"/>
+                    <Button Content="Видалити" Width="90" Height="30" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="200,375,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnDeleteFuel_Click"/>
+                    <TextBlock x:Name="TxtFuelMessage" FontSize="13" Foreground="Red"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,415,0,0" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Резервуари">
+                <Grid Margin="10">
+                    <DataGrid x:Name="DgTanks"
+                  Height="280"
+                  VerticalAlignment="Top"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="№" Binding="{Binding Number}" Width="50"/>
+                            <DataGridTextColumn Header="Паливо" Binding="{Binding FuelType.Name}" Width="120"/>
+                            <DataGridTextColumn Header="Місткість" Binding="{Binding Capacity}" Width="90"/>
+                            <DataGridTextColumn Header="Залишок" Binding="{Binding CurrentLevel}" Width="90"/>
+                            <DataGridTextColumn Header="%" Binding="{Binding FillPercentage, StringFormat={}{0:F1}}" Width="60"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Text="№:" FontSize="14"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   Margin="0,295,0,0"/>
+                    <TextBox x:Name="TxtTankNumber" Width="50" Height="30" FontSize="14"
+                 HorizontalAlignment="Left" VerticalAlignment="Top"
+                 Margin="25,292,0,0" Padding="4,4"/>
+                    <TextBlock Text="Паливо:" FontSize="14"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   Margin="85,295,0,0"/>
+                    <ComboBox x:Name="CmbTankFuel" Width="130" Height="30" FontSize="14"
+                  HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Margin="140,292,0,0"/>
+                    <TextBlock Text="Місткість:" FontSize="14"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   Margin="285,295,0,0"/>
+                    <TextBox x:Name="TxtTankCapacity" Width="80" Height="30" FontSize="14"
+                 HorizontalAlignment="Left" VerticalAlignment="Top"
+                 Margin="360,292,0,0" Padding="4,4"/>
+                    <Button Content="Додати" Width="90" Height="30" FontSize="14"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Margin="0,335,0,0"
+                Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                Click="BtnAddTank_Click"/>
+                    <Button Content="Зберегти" Width="90" Height="30" FontSize="14"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Margin="100,335,0,0"
+                Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                Click="BtnEditTank_Click"/>
+                    <TextBlock Text="Поповнити (л):" FontSize="14"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   Margin="0,385,0,0"/>
+                    <TextBox x:Name="TxtRefillAmount" Width="80" Height="30" FontSize="14"
+                 HorizontalAlignment="Left" VerticalAlignment="Top"
+                 Margin="120,382,0,0" Padding="4,4"/>
+                    <Button Content="Поповнити" Width="100" Height="30" FontSize="14"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Margin="215,382,0,0"
+                Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                Click="BtnRefillTank_Click"/>
+                    <TextBlock x:Name="TxtTankMessage" FontSize="13" Foreground="Red"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   Margin="0,425,0,0" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Бонусні картки">
+                <Grid Margin="10">
+                    <DataGrid x:Name="DgBonusCards"
+                              Height="300"
+                              VerticalAlignment="Top"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер" Binding="{Binding CardNumber}" Width="130"/>
+                            <DataGridTextColumn Header="ПІБ" Binding="{Binding FullName}" Width="130"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="130"/>
+                            <DataGridTextColumn Header="Баланс" Binding="{Binding BonusBalance}" Width="70"/>
+                            <DataGridTextColumn Header="Рівень" Binding="{Binding LoyaltyLevel}" Width="70"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <TextBlock Text="ПІБ:" FontSize="14"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,315,0,0"/>
+                    <TextBox x:Name="TxtCardFullName" Width="170" Height="30" FontSize="14"
+                             HorizontalAlignment="Left" VerticalAlignment="Top"
+                             Margin="45,312,0,0" Padding="4,4"/>
+                    <TextBlock Text="Телефон:" FontSize="14"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="230,315,0,0"/>
+                    <TextBox x:Name="TxtCardPhone" Width="150" Height="30" FontSize="14"
+                             HorizontalAlignment="Left" VerticalAlignment="Top"
+                             Margin="300,312,0,0" Padding="4,4"/>
+                    <Button Content="Створити" Width="90" Height="30" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="0,355,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnCreateCard_Click"/>
+                    <Button Content="Зберегти" Width="90" Height="30" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="100,355,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnEditCard_Click"/>
+                    <Button Content="Видалити" Width="90" Height="30" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="200,355,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnDeleteCard_Click"/>
+                    <TextBlock x:Name="TxtCardMessage" FontSize="13" Foreground="Red"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,395,0,0" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Звіт">
+                <Grid Margin="10">
+                    <Button Content="Сформувати фінансовий звіт"
+                            Width="220" Height="36" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="0,10,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnFinancialReport_Click"/>
+                    <TextBlock x:Name="TxtFinancialReport" FontSize="15"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,60,0,0" TextWrapping="Wrap"/>
+                    <Button Content="Статистика операторів"
+                            Width="220" Height="36" FontSize="14"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="0,200,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnOperatorStats_Click"/>
+                    <TextBlock x:Name="TxtOperatorStats" FontSize="15"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,250,0,0" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="JSON">
+                <Grid Margin="10">
+                    <Button Content="Зберегти у JSON"
+                            Width="200" Height="40" FontSize="15" FontWeight="Bold"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="0,20,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnSaveJson_Click"/>
+                    <Button Content="Завантажити з JSON"
+                            Width="200" Height="40" FontSize="15" FontWeight="Bold"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="0,80,0,0"
+                            Background="#FFB6D2D0" BorderBrush="#FF728C8A" BorderThickness="2"
+                            Click="BtnLoadJson_Click"/>
+                    <TextBlock x:Name="TxtJsonMessage" FontSize="14"
+                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Margin="0,140,0,0" TextWrapping="Wrap"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
