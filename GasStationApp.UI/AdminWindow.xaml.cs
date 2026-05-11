@@ -305,6 +305,7 @@ namespace GasStationApp.UI
             }
             string fullName = TxtCardFullName.Text.Trim();
             string phone = TxtCardPhone.Text.Trim();
+
             if (string.IsNullOrWhiteSpace(fullName))
             {
                 TxtCardMessage.Text = "Помилка: некоректний ПІБ";
@@ -314,6 +315,12 @@ namespace GasStationApp.UI
             if (!BonusCard.IsValidPhone(phone))
             {
                 TxtCardMessage.Text = "Помилка: некоректний формат телефону. Використовуйте +38(0XX)-XXX-XX-XX";
+                TxtCardMessage.Foreground = System.Windows.Media.Brushes.Red;
+                return;
+            }
+            if (_bonusCards.Any(c => c.Phone.Trim() == phone && c.CardNumber != selected.CardNumber))
+            {
+                TxtCardMessage.Text = "Помилка: картка з таким номером телефону вже існує";
                 TxtCardMessage.Foreground = System.Windows.Media.Brushes.Red;
                 return;
             }

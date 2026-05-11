@@ -30,6 +30,19 @@ namespace GasStationApp.UI
         public LoginWindow()
         {
             InitializeComponent();
+            this.IsVisibleChanged += (s, e) =>
+            {
+                if (this.IsVisible)
+                {
+                    TxtLogin.Clear();
+                    TxtPassword.Clear();
+                    TxtPasswordVisible.Clear();
+                    TxtError.Text = "";
+                    _passwordVisible = false;
+                    TxtPassword.Visibility = Visibility.Visible;
+                    TxtPasswordVisible.Visibility = Visibility.Collapsed;
+                }
+            };
             _users = new List<User>
             {
                 new Administrator("admin", "Admin123"),

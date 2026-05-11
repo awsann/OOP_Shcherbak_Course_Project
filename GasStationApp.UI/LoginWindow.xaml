@@ -68,11 +68,5 @@
                    VerticalAlignment="Top"
                    Margin="0,540,0,0"
                    TextWrapping="Wrap"/>
-        <Label 
-            Content="Виконав: студент(ка) 2 курсу групи 622п: Щербак А. В." 
-            HorizontalAlignment="Center" 
-            Margin="0,54,0,0" 
-            VerticalAlignment="Top" 
-            FontSize="18"/>
     </Grid>
 </Window>
